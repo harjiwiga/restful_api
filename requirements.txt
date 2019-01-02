@@ -10,3 +10,5 @@ passlib
 tox
 celery
 gunicorn
+psycopg2-binary
+SQLAlchemy-Utils
