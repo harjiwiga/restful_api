@@ -4,6 +4,7 @@ from myapi.extensions import db, pwd_context
 class User(db.Model):
     """Basic user model
     """
+    __tablename__ = "user_v2"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(80), unique=True, nullable=False)
