@@ -19,19 +19,38 @@ def init():
     and create a new user named admin with password admin
     """
     from myapi.extensions import db
-    from myapi.models import User
+    from myapi.models import User,UserType
+
+
     click.echo("create database")
     db.create_all()
     click.echo("done")
 
     click.echo("create user")
+
     user = User(
         username='admin',
         email='admin@mail.com',
         password='admin',
         active=True
     )
+
+    citizen = UserType(
+        name='citizen'
+    )
+
+    goverment = UserType(
+        name='government'
+    )
+
+    userTypes = db.session.query(UserType).all()
+    
+    # userTypes = UserType
+    db.session.add(citizen)
+    db.session.add(goverment)
+
     db.session.add(user)
+
     db.session.commit()
     click.echo("created user admin")
 
