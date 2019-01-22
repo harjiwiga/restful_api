@@ -1,16 +1,16 @@
 from myapi.extensions import db, pwd_context
 
-
 class User(db.Model):
     """Basic user model
     """
-    __tablename__ = "user_v2"
+    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     active = db.Column(db.Boolean, default=True)
     user_type_id = db.Column(db.Integer, db.ForeignKey('user_type.id'))
+
     
     
     def __init__(self, **kwargs):

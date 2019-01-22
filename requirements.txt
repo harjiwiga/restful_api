@@ -12,3 +12,4 @@ celery
 gunicorn
 psycopg2-binary
 SQLAlchemy-Utils
+geoalchemy2
