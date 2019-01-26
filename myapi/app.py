@@ -1,7 +1,7 @@
 from flask import Flask
 
 from myapi import auth, api
-from myapi.extensions import db, jwt, migrate, celery
+from myapi.extensions import db, jwt, migrate, celery,rbac
 
 
 def create_app(config=None, testing=False, cli=False):
@@ -36,7 +36,7 @@ def configure_extensions(app, cli):
     """
     db.init_app(app)
     jwt.init_app(app)
-
+    rbac.init_app(app)
     if cli is True:
         migrate.init_app(app, db)
 

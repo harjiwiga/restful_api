@@ -13,3 +13,6 @@ gunicorn
 psycopg2-binary
 SQLAlchemy-Utils
 geoalchemy2
+flask-rbac
+flask-security
+flask-admin

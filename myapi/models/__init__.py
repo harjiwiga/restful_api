@@ -8,5 +8,6 @@ __all__ = [
     'TokenBlacklist',
     'UserType',
     'Report',
-    'ReportType'
+    'ReportType',
+    'Role'
 ]

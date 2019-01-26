@@ -20,6 +20,7 @@ class Report(db.Model):
     users = db.relationship("User", secondary = report_user_table, backref=db.backref("reports", lazy="dynamic"), lazy= "dynamic")
     update_status_time = db.Column(db.DateTime, nullable=False)
     
+    
     def __init__(self,**kwargs):
         super(Report, self).__init__(**kwargs)
 

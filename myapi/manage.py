@@ -3,8 +3,9 @@ from flask.cli import FlaskGroup
 
 from myapi.app import create_app
 from myapi.extensions import db
-from myapi.models import User,UserType
-from myapi.models.report import ReportType, Status
+from myapi.models import User, UserType, Role
+from myapi.models.report import ReportType, Status, Report
+from myapi.models import helpers
 
 def create_myapi(info):
     return create_app(cli=True)
@@ -40,7 +41,7 @@ def init():
         name='citizen'
     )
 
-    goverment = UserType(
+    government = UserType(
         name='government'
     )
 
@@ -57,7 +58,33 @@ def init():
         name='wild_animal'
     )
 
-    
+    # ============== init role ================
+    # helpers.get_or_create(
+    #     db.session,
+    #     Role,
+    #     name='admin'
+    # )
+    #
+    # helpers.get_or_create(
+    #     db.session,
+    #     Role,
+    #     name='government'
+    # )
+    #
+    # helpers.get_or_create(
+    #     db.session,
+    #     Role,
+    #     name='citizen'
+    # )
+    #
+    # helpers.get_or_create(
+    #     db.session,
+    #     Role,
+    #     name='anonymous'
+    # )
+    # =========================================
+
+
     # userTypes = UserType
     citizen_exist = db.session.query(db.exists().where(UserType.name == 'citizen')).scalar()
     if not citizen_exist:
@@ -65,8 +92,7 @@ def init():
 
     goverment_exist = db.session.query(db.exists().where(UserType.name == 'government')).scalar()
     if not goverment_exist:
-        db.session.add(goverment)
-
+        db.session.add(government)
 
     if not admin_exsist:
         db.session.add(user)
@@ -98,6 +124,46 @@ def init():
     done_exist = db.session.query(db.exists().where(Status.name == 'done')).scalar()
     if not done_exist:
         db.session.add(done)
+    db.session.flush()
+    government = UserType.query.filter_by(name='government').first()
+    jokowi = User(username='Jokowi',
+                        email='jokowi@indonesia.go.id',
+                        password='jokowi',
+                        active =True,
+                        user_type = government
+                  )
+
+    jokowi_exist = db.session.query(db.exists().where(User.username == 'Jokowi')).scalar()
+
+    if not jokowi_exist:
+        db.session.add(jokowi)
+
+    citizen = UserType.query.filter_by(name='citizen').first()
+    prabowo = User(username='Prabowo',
+                  email='prabowo@indonesia.go.id',
+                  password='prabowo',
+                  active=True,
+                  user_type=citizen)
+
+    prabowo_exist = db.session.query(db.exists().where(User.username == 'Prabowo')).scalar()
+
+    if not jokowi_exist:
+        db.session.add(jokowi)
+
+    if not prabowo_exist:
+        db.session.add(prabowo)
+
+    helpers.get_or_create(
+        db.session,
+        User,
+        username='Maruf Amin',
+        email = 'maruf.amin@indonesia.go.id',
+        password = 'maruf',
+        active = True,
+        user_type= citizen
+    )
+
+
 
     db.session.commit()
     click.echo("init data")
@@ -107,8 +173,22 @@ def init():
 def remove():
     db.session.query(User).delete()
     db.session.commit()
+
     db.session.query(UserType).delete()
     db.session.commit()
+
+    db.session.query(UserType).delete()
+    db.session.commit()
+
+    db.session.query(Status).delete()
+    db.session.commit()
+
+    db.session.query(Report).delete()
+    db.session.commit()
+
+    db.session.query(ReportType).delete()
+    db.session.commit()
+
     click.echo("deleted existing row ")
 
 if __name__ == "__main__":
