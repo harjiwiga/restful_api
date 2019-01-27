@@ -22,7 +22,7 @@ class UserType(db.Model):
 class User(db.Model,UserMixin):
     """Basic user model
     """
-    __tablename__ = 'user'
+    __tablename__ = 'user_v2'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(80), unique=True, nullable=False)

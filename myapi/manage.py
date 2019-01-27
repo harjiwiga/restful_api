@@ -6,6 +6,8 @@ from myapi.extensions import db
 from myapi.models import User, UserType, Role
 from myapi.models.report import ReportType, Status, Report
 from myapi.models import helpers
+from myapi.models.blacklist import TokenBlacklist
+
 
 def create_myapi(info):
     return create_app(cli=True)
@@ -184,8 +186,11 @@ def init():
     click.echo("init data")
 
 
-@cli.command("remove")
-def remove():
+@cli.command("clear")
+def clear():
+    db.session.query(TokenBlacklist).delete()
+    db.session.commit()
+
     db.session.query(User).delete()
     db.session.commit()
 
