@@ -24,6 +24,7 @@ class UserResource(Resource):
     def get(self, user_id):
         schema = UserSchema()
         user = User.query.get_or_404(user_id)
+
         return {"user": schema.dump(user).data}
 
     def put(self, user_id):

@@ -9,7 +9,7 @@ from flask_jwt_extended import (
 )
 
 from myapi.models import User
-from myapi.extensions import pwd_context, jwt
+from myapi.extensions import pwd_context, jwt, rbac
 from myapi.auth.helpers import (
     revoke_token,
     is_token_revoked,
@@ -21,6 +21,7 @@ blueprint = Blueprint('auth', __name__, url_prefix='/auth')
 
 
 @blueprint.route('/login', methods=['POST'])
+# @rbac.allow(['anonmous'], methods=['POST'])
 def login():
     """Authenticate user and return token
     """

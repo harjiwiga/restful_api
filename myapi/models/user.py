@@ -1,6 +1,6 @@
 from myapi.extensions import db, pwd_context,rbac
 from flask_rbac import UserMixin
-from myapi.models.Role import Role
+from myapi.models.role import Role
 
 users_roles = db.Table(
     'users_roles',
@@ -34,7 +34,7 @@ class User(db.Model,UserMixin):
                                   user_type_id == UserType.id,
                                   post_update=True)
     roles = db.relationship(
-        'Role',
+        Role,
         secondary=users_roles,
         backref=db.backref('roles', lazy='dynamic')
     )
@@ -56,5 +56,4 @@ class User(db.Model,UserMixin):
     def get_roles(self):
         for role in self.roles:
             yield role
-    
-    
+

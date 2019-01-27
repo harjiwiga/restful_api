@@ -59,29 +59,29 @@ def init():
     )
 
     # ============== init role ================
-    # helpers.get_or_create(
-    #     db.session,
-    #     Role,
-    #     name='admin'
-    # )
-    #
-    # helpers.get_or_create(
-    #     db.session,
-    #     Role,
-    #     name='government'
-    # )
-    #
-    # helpers.get_or_create(
-    #     db.session,
-    #     Role,
-    #     name='citizen'
-    # )
-    #
-    # helpers.get_or_create(
-    #     db.session,
-    #     Role,
-    #     name='anonymous'
-    # )
+    helpers.get_or_create(
+        db.session,
+        Role,
+        name='admin'
+    )
+
+    helpers.get_or_create(
+        db.session,
+        Role,
+        name='government'
+    )
+
+    helpers.get_or_create(
+        db.session,
+        Role,
+        name='citizen'
+    )
+
+    helpers.get_or_create(
+        db.session,
+        Role,
+        name='anonymous'
+    )
     # =========================================
 
 
@@ -153,15 +153,30 @@ def init():
     if not prabowo_exist:
         db.session.add(prabowo)
 
-    helpers.get_or_create(
-        db.session,
-        User,
-        username='Maruf Amin',
+
+
+    maruf_amin = User(
+        username = 'Maruf Amin',
         email = 'maruf.amin@indonesia.go.id',
         password = 'maruf',
         active = True,
-        user_type= citizen
+        user_type = citizen
     )
+
+    maruf_exist = db.session.query(db.exists().where(User.email == 'maruf.amin@indonesia.go.id')).scalar()
+    if not maruf_exist:
+        db.session.add(maruf_amin)
+
+    # helpers.get_or_create(
+    #     db.session,
+    #     User,
+    #     username='Maruf Amin',
+    #     email = 'maruf.amin@indonesia.go.id',
+    #     password = 'maruf',
+    #     active = True,
+    #     user_type= citizen
+    # )
+
 
 
 
