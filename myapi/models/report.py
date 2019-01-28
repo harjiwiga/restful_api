@@ -1,9 +1,10 @@
 from myapi.extensions import db
+from myapi.models.table_name import TableName
 
 
 report_user_table = db.Table('report_user_table',db.metadata,
                              db.Column('report_id', db.Integer, db.ForeignKey('report.id')),
-                             db.Column('user_id', db.Integer, db.ForeignKey('user.id'))
+                             db.Column('user_id', db.Integer, db.ForeignKey(TableName.USER+'.id'))
                              )
 
 

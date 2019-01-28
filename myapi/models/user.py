@@ -1,10 +1,11 @@
 from myapi.extensions import db, pwd_context,rbac
 from flask_rbac import UserMixin
 from myapi.models.role import Role
+from myapi.models.table_name import TableName
 
 users_roles = db.Table(
     'users_roles',
-    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('user_id', db.Integer, db.ForeignKey(TableName.USER+'.id')),
     db.Column('role_id', db.Integer, db.ForeignKey('role.id'))
 )
 
@@ -22,7 +23,7 @@ class UserType(db.Model):
 class User(db.Model,UserMixin):
     """Basic user model
     """
-    __tablename__ = 'user'
+    __tablename__ = TableName.USER
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(80), unique=True, nullable=False)
