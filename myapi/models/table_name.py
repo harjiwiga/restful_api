@@ -1,4 +1,4 @@
 
 class TableName:
-    USER = 'user_v2'
+    USER = 'user'
     REPORT = 'report'

@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: ba0ddcb9ad6f
+Revision ID: fc49e12e29bc
 Revises: 
-Create Date: 2019-01-29 06:42:07.723764
+Create Date: 2019-01-29 06:53:48.314745
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ba0ddcb9ad6f'
+revision = 'fc49e12e29bc'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -54,7 +54,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['status'], ['status.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('user_v2',
+    op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=80), nullable=False),
     sa.Column('email', sa.String(length=80), nullable=False),
@@ -70,7 +70,7 @@ def upgrade():
     sa.Column('report_id', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['report_id'], ['report.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user_v2.id'], )
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], )
     )
     op.create_table('token_blacklist',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -79,7 +79,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('revoked', sa.Boolean(), nullable=False),
     sa.Column('expires', sa.DateTime(), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['user_v2.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('jti')
     )
@@ -87,7 +87,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('role_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['role_id'], ['role.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user_v2.id'], )
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], )
     )
     # ### end Alembic commands ###
 
@@ -97,7 +97,7 @@ def downgrade():
     op.drop_table('users_roles')
     op.drop_table('token_blacklist')
     op.drop_table('report_user_table')
-    op.drop_table('user_v2')
+    op.drop_table('user')
     op.drop_table('report')
     op.drop_table('user_type')
     op.drop_table('status')
