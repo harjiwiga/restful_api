@@ -9,7 +9,6 @@ from flask_jwt_extended import JWTManager
 from flask_marshmallow import Marshmallow
 from flask_migrate import Migrate
 from celery import Celery
-from flask_rbac import RBAC
 
 
 db = SQLAlchemy()
@@ -18,4 +17,4 @@ ma = Marshmallow()
 migrate = Migrate()
 pwd_context = CryptContext(schemes=['pbkdf2_sha256'], deprecated='auto')
 celery = Celery()
-rbac = RBAC()
+

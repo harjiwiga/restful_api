@@ -9,7 +9,7 @@ from flask_jwt_extended import (
 )
 
 from myapi.models import User
-from myapi.extensions import pwd_context, jwt, rbac
+from myapi.extensions import pwd_context, jwt
 from myapi.auth.helpers import (
     revoke_token,
     is_token_revoked,
@@ -43,6 +43,8 @@ def login():
     add_token_to_database(refresh_token, app.config['JWT_IDENTITY_CLAIM'])
 
     ret = {
+        'user_id':user.id,
+        'user_name': user.username,
         'access_token': access_token,
         'refresh_token': refresh_token
     }

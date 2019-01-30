@@ -16,7 +16,10 @@ setup(
         'flask-marshmallow',
         'marshmallow-sqlalchemy',
         'python-dotenv',
-        'passlib'
+        'passlib',
+        'flask-rbac',
+        'flask-security',
+        'flask-admin'
     ],
     entry_points={
         'console_scripts': [

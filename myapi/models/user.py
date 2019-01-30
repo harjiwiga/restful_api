@@ -1,5 +1,4 @@
-from myapi.extensions import db, pwd_context,rbac
-from flask_rbac import UserMixin
+from myapi.extensions import db, pwd_context
 from myapi.models.role import Role
 from myapi.models.table_name import TableName
 
@@ -19,8 +18,7 @@ class UserType(db.Model):
     def __repr__(self):
         return "<UserType %s>" % self.name
 
-@rbac.as_user_model
-class User(db.Model,UserMixin):
+class User(db.Model):
     """Basic user model
     """
     __tablename__ = TableName.USER

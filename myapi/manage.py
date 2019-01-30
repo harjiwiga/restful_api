@@ -156,7 +156,6 @@ def init():
         db.session.add(prabowo)
 
 
-
     maruf_amin = User(
         username = 'Maruf Amin',
         email = 'maruf.amin@indonesia.go.id',
@@ -178,9 +177,6 @@ def init():
     #     active = True,
     #     user_type= citizen
     # )
-
-
-
 
     db.session.commit()
     click.echo("init data")

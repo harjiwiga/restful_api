@@ -93,3 +93,6 @@ ENV/
 .idea*
 .pytest_cache*
 /myapi/myapi.db
+.DS_Store
+.DS_Store*
+*.DS_Store*

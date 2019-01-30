@@ -1,5 +1,5 @@
 from flask_rbac import RoleMixin
-from myapi.extensions import db,rbac
+from myapi.extensions import db
 
 # roles_parents = db.Table(
 #     'roles_parents',
@@ -7,7 +7,7 @@ from myapi.extensions import db,rbac
 #     db.Column('parent_id', db.Integer, db.ForeignKey('role.id'))
 # )
 
-@rbac.as_role_model
+
 class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
