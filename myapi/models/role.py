@@ -1,4 +1,4 @@
-from flask_rbac import RoleMixin
+# from flask_rbac import RoleMixin
 from myapi.extensions import db
 
 # roles_parents = db.Table(
@@ -8,12 +8,12 @@ from myapi.extensions import db
 # )
 
 
-class Role(db.Model, RoleMixin):
+class Role(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
 
     def __init__(self, name):
-        RoleMixin.__init__(self)
+        # RoleMixin.__init__(self)
         self.name = name
 
     @staticmethod

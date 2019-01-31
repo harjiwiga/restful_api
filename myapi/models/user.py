@@ -4,9 +4,10 @@ from myapi.models.table_name import TableName
 
 users_roles = db.Table(
     'users_roles',
-    db.Column('user_id', db.Integer, db.ForeignKey(TableName.USER+'.id')),
+    db.Column('user_id', db.Integer, db.ForeignKey(TableName.USER + '.id')),
     db.Column('role_id', db.Integer, db.ForeignKey('role.id'))
 )
+
 
 class UserType(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -17,6 +18,7 @@ class UserType(db.Model):
 
     def __repr__(self):
         return "<UserType %s>" % self.name
+
 
 class User(db.Model):
     """Basic user model
@@ -29,14 +31,15 @@ class User(db.Model):
     active = db.Column(db.Boolean, default=True)
     user_type_id = db.Column(db.Integer, db.ForeignKey('user_type.id'))
     user_type = db.relationship(UserType,
-                                  primaryjoin=
-                                  user_type_id == UserType.id,
-                                  post_update=True)
+                                primaryjoin=
+                                user_type_id == UserType.id,
+                                post_update=True)
     roles = db.relationship(
         Role,
         secondary=users_roles,
         backref=db.backref('roles', lazy='dynamic')
     )
+
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -55,4 +58,3 @@ class User(db.Model):
     def get_roles(self):
         for role in self.roles:
             yield role
-
