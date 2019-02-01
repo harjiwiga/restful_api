@@ -7,9 +7,10 @@ from flask_jwt_extended import (
 
 )
 
-from myapi.models.report import Report,ReportType
+from myapi.models.report import Report, ReportType
 from myapi.extensions import ma, db
 from myapi.commons.pagination import paginate
+
 
 # current_user = get_jwt_identity()
 
@@ -18,16 +19,19 @@ class ReportSchema(ma.ModelSchema):
         model = Report
         sqla_session = db.session
 
+
 class ReportTypeSchema(ma.ModelSchema):
     class Meta:
         model = ReportType
         sqla_session = db.session
 
+
 class ReportResource(Resource):
     method_decorators = [jwt_required]
 
-    def get(self,Report):
+    def get(self, Report):
         schema = ReportSchema()
+
 
 class ReportTypeResource(Resource):
     method_decorators = [jwt_required]
@@ -39,12 +43,10 @@ class ReportTypeResource(Resource):
         return schema.dump(report_types).data
 
 
-# class ReportList(Resource):
-#     method_decorators = [jwt_required]
-#
-#     def get(self):
-#         schema = ReportSchema(many=True)
-#         reports = Report.query.filter_by(users = [current_user])
+class ReportList(Resource):
+    method_decorators = [jwt_required]
 
-
-
+    def get(self):
+        schema = ReportSchema(many=True)
+        user = get_current_user()
+        # reports = Report.query.filter_by(users = )

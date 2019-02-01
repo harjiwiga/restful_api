@@ -8,7 +8,6 @@ from myapi.commons.pagination import paginate
 
 
 class UserSchema(ma.ModelSchema):
-
     password = ma.String(load_only=True, required=True)
 
     class Meta:
