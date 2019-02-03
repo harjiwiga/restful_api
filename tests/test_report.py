@@ -32,7 +32,7 @@ from myapi.models import Report, ReportType
 #     assert user.email == 'create@mail.com'
 
 
-def test_get_all_report_type(client, db, citizen_header):
+def test_get_all_report_type(client, db, citizen_user_headers):
     broken_road = ReportType(
         name='broken_road'
     )
@@ -52,5 +52,5 @@ def test_get_all_report_type(client, db, citizen_header):
     db.session.add_all([broken_road, traffic_jam, wild_animal, flood])
     db.session.commit()
 
-    rep = client.get('/api/v1/report/types', headers=citizen_header)
+    rep = client.get('/api/v1/report/types', headers=citizen_user_headers)
     assert rep.status_code == 200

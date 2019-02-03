@@ -17,3 +17,7 @@ JWT_BLACKLIST_ENABLED = True
 JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
 CELERY_BROKER_URL = "amqp://guest:guest@localhost/"
 CELERY_RESULT_BACKEND = "amqp://guest:guest@localhost/"
+
+LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT') or True
+
+ALLOW_NO_VALUE = True
