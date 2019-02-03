@@ -16,3 +16,5 @@ geoalchemy2
 flask-rbac
 flask-security
 flask-admin
+geopy
+marshmallow

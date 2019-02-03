@@ -19,7 +19,10 @@ setup(
         'passlib',
         'flask-rbac',
         'flask-security',
-        'flask-admin'
+        'flask-admin',
+        'geoalchemy2',
+        'geopy',
+        'marshmallow'
     ],
     entry_points={
         'console_scripts': [

@@ -8,8 +8,9 @@ Use env var to override
 DEBUG = True
 SECRET_KEY = "changeme"
 
-SQLALCHEMY_DATABASE_URI =  os.environ.get('DATABASE_URL') or  'sqlite:///' + os.path.join(basedir, 'myapi.db')
+SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')# or 'sqlite:///' + os.path.join(basedir, 'myapi.db')
 # "sqlite:////tmp/myapi.db"
+
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 JWT_BLACKLIST_ENABLED = True

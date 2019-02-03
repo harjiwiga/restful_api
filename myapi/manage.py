@@ -47,7 +47,6 @@ def init():
         name='government'
     )
 
-
     traffic_accident = ReportType(
         name='traffic_accident'
     )
@@ -58,6 +57,12 @@ def init():
 
     wild_animal = ReportType(
         name='wild_animal'
+    )
+
+    helpers.get_or_create(
+        db.session,
+        ReportType,
+        name='fallen_tree'
     )
 
     # ============== init role ================
@@ -86,7 +91,6 @@ def init():
     )
     # =========================================
 
-
     # userTypes = UserType
     citizen_exist = db.session.query(db.exists().where(UserType.name == 'citizen')).scalar()
     if not citizen_exist:
@@ -111,7 +115,7 @@ def init():
     if not wild_animal_exist:
         db.session.add(wild_animal)
 
-    reported = Status(name= 'reported')
+    reported = Status(name='reported')
     on_handled = Status(name='on_handled')
     done = Status(name='done')
 
@@ -129,10 +133,10 @@ def init():
     db.session.flush()
     government = UserType.query.filter_by(name='government').first()
     jokowi = User(username='Jokowi',
-                        email='jokowi@indonesia.go.id',
-                        password='jokowi',
-                        active =True,
-                        user_type = government
+                  email='jokowi@indonesia.go.id',
+                  password='jokowi',
+                  active=True,
+                  user_type=government
                   )
 
     jokowi_exist = db.session.query(db.exists().where(User.username == 'Jokowi')).scalar()
@@ -142,10 +146,10 @@ def init():
 
     citizen = UserType.query.filter_by(name='citizen').first()
     prabowo = User(username='Prabowo',
-                  email='prabowo@indonesia.go.id',
-                  password='prabowo',
-                  active=True,
-                  user_type=citizen)
+                   email='prabowo@indonesia.go.id',
+                   password='prabowo',
+                   active=True,
+                   user_type=citizen)
 
     prabowo_exist = db.session.query(db.exists().where(User.username == 'Prabowo')).scalar()
 
@@ -155,13 +159,12 @@ def init():
     if not prabowo_exist:
         db.session.add(prabowo)
 
-
     maruf_amin = User(
-        username = 'Maruf Amin',
-        email = 'maruf.amin@indonesia.go.id',
-        password = 'maruf',
-        active = True,
-        user_type = citizen
+        username='Maruf Amin',
+        email='maruf.amin@indonesia.go.id',
+        password='maruf',
+        active=True,
+        user_type=citizen
     )
 
     maruf_exist = db.session.query(db.exists().where(User.email == 'maruf.amin@indonesia.go.id')).scalar()
@@ -206,6 +209,7 @@ def clear():
     db.session.commit()
 
     click.echo("deleted existing row ")
+
 
 if __name__ == "__main__":
     cli()
